@@ -2,16 +2,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    private let musicTypes: [String] = ["Pop",
-                                        "Rock",
-                                        "Reggea",
-                                        "Soul",
-                                        "Country",
-                                        "Funk",
-                                        "Jazz",
-                                        "Disco",
-                                        "Electronic",
-                                        "Blues"]
+    private let musicTypes: [String] = ["Pop", "Rock", "Reggea", "Soul", "Country", "Funk", "Jazz", "Disco", "Electronic", "Blues"]
     
     let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: SearchResultsViewController())
@@ -71,13 +62,15 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let resultsController = searchController.searchResultsController as? SearchResultsViewController,
-            let query = searchController.searchBar.text,
-            !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+              let query = searchController.searchBar.text,
+              !query.trimmingCharacters(in: .whitespaces).isEmpty
+        else {
             return
         }
         
         // update(with: results
         print(query)
+        print(resultsController.title ?? "OK")
         
         // perform search
         // APICaller.shared.search

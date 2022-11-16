@@ -17,7 +17,7 @@ class WelcomeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         title = Constants.title
-        view.backgroundColor = .systemGreen
+        view.backgroundColor = .systemRed
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
     }
