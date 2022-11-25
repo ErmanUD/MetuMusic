@@ -52,6 +52,7 @@
 		05CDD84828B8FC7B0045623F /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05CDD84728B8FC7B0045623F /* Extentions.swift */; };
 		05D515B228BA9D9E00D8DCED /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D515B128BA9D9E00D8DCED /* AuthResponse.swift */; };
 		A279F4BB2925080C00F2960E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279F4BA2925080C00F2960E /* Constants.swift */; };
+		A2AB0C202930F5E00026105B /* AllCategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB0C1F2930F5E00026105B /* AllCategoriesResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		05CDD84728B8FC7B0045623F /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		05D515B128BA9D9E00D8DCED /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		A279F4BA2925080C00F2960E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A2AB0C1F2930F5E00026105B /* AllCategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCategoriesResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				056E31D828C0E97500F0D8DE /* RecommendationsResponse.swift */,
 				051AEE5628FEA1C5002CF276 /* AlbumDetailsResponse.swift */,
 				051AEE5828FEA7F6002CF276 /* PlaylistDetailsResponse.swift */,
+				A2AB0C1F2930F5E00026105B /* AllCategoriesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				05222B6228F05F62009BE807 /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				0574438228B67224009EA6A2 /* AuthManager.swift in Sources */,
 				0574438028B67205009EA6A2 /* SearchResultsViewController.swift in Sources */,
+				A2AB0C202930F5E00026105B /* AllCategoriesResponse.swift in Sources */,
 				A279F4BB2925080C00F2960E /* Constants.swift in Sources */,
 				050AD58628BBBDA800607DB0 /* SettingsModels.swift in Sources */,
 				0574437628B671A8009EA6A2 /* WelcomeViewController.swift in Sources */,
