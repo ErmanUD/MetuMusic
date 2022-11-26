@@ -3,7 +3,8 @@ import UIKit
 class SearchViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate {
     
     private let musicTypes: [String] = ["Pop", "Rock", "Reggea", "Soul", "Country", "Funk", "Jazz", "Disco", "Electronic", "Blues"]
-    
+    private var categories = [Category]()
+
     let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: SearchResultsViewController())
         vc.searchBar.placeholder = "Songs and More"
@@ -37,7 +38,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
             
             return NSCollectionLayoutSection(group: group)
         }))
-    
+        
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -47,8 +48,8 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
         searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         view.addSubview(collectionView)
-        collectionView.register(GenreCollectionViewCell.self,
-                                forCellWithReuseIdentifier: GenreCollectionViewCell.identifier)
+        collectionView.register(CategoryCollectionViewCelll.self,
+                                forCellWithReuseIdentifier: CategoryCollectionViewCelll.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground
@@ -56,13 +57,11 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
         APICaller.shared.getCategoriies { [weak self] res in
             DispatchQueue.main.async {
                 switch res {
-                case .success(let models):
-                    let first = models.first!
-                    APICaller.shared.getCategoryPlaylists(category: first) { foo in
-                        
-                    }
+                case .success(let categories):
+                    self?.categories = categories
+                    self?.collectionView.reloadData()
                 case .failure(let error):
-                    break
+                    print(error.localizedDescription)
                 }
             }
         }
@@ -97,18 +96,32 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: GenreCollectionViewCell.identifier,
+            withReuseIdentifier: CategoryCollectionViewCelll.identifier,
             for: indexPath
-        ) as? GenreCollectionViewCell else {
+        ) as? CategoryCollectionViewCelll else {
             return UICollectionViewCell()
         }
-        cell.configure(with: musicTypes[indexPath.row])
+        let category = categories[indexPath.row]
+        cell.configure(
+            with: CategoryCollectionViewCellViewModel(
+                title: category.name,
+                artworkURL: category.icons.first?.url ?? ""
+            )
+        )
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let category = categories[indexPath.row]
+        let vc = CategoryViewController(category: category)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

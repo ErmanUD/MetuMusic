@@ -1,7 +1,7 @@
 import UIKit
 
-class GenreCollectionViewCell: UICollectionViewCell {
-    static let identifier = "GenreCollectionViewCell"
+class CategoryCollectionViewCelll: UICollectionViewCell {
+    static let identifier = "CategoryCollectionViewCelll"
     
     private let colors: [UIColor] = [
 //        .systemMint,      // alternative coloring
@@ -54,6 +54,7 @@ class GenreCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         label.text = nil
+        imageView.image = UIImage(systemName: "music.quarternote.3")
     }
     
     override func layoutSubviews() {
@@ -73,9 +74,9 @@ class GenreCollectionViewCell: UICollectionViewCell {
         )
     }
     
-    func configure(with title: String) {
-        label.text = title
-//        contentView.backgroundColor = colors.randomElement()
+    func configure(with viewModel: CategoryCollectionViewCellViewModel) {
+        label.text = viewModel.title
+//        imageView.loadFrom(URLAddress: viewModel.artworkURL)
         contentView.backgroundColor = colors[0]
     }
 }

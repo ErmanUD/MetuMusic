@@ -88,7 +88,8 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
     func configure(with viewModel: FeaturedPlaylistCellViewModel) {
         playlistNameLabel.text = viewModel.name
         creatorNameLabel.text =  viewModel.creatorName
-        playlistCoverImageView.image = loadImage(url: viewModel.artworkURL)
+//        playlistCoverImageView.image = loadImage(url: viewModel.artworkURL)
+        playlistCoverImageView.loadFrom(URLAddress: viewModel.artworkURL)
     }
     
     func loadImage(url: URL?) -> UIImage {

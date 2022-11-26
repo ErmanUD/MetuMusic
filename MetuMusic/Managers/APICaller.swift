@@ -204,7 +204,7 @@ final class APICaller {
     
     public func getCategoryPlaylists(category: Category, completion: @escaping (Result<[Playlist], Error>) -> Void) {
         createRequest(
-            with: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=2"),
+            with: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=20"),
             type: .GET
         ) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -218,7 +218,6 @@ final class APICaller {
 //                    print(json)
                     let result = try JSONDecoder().decode(CategoryPlaylistsResponse.self, from: data)
                     let playlists = result.playlists.items
-                    print(playlists)
                     completion(.success(playlists))
                 } catch {
                     completion(.failure(error))
