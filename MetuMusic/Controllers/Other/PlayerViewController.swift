@@ -1,6 +1,16 @@
 import UIKit
 
+protocol PlayerViewControllerDelegate: AnyObject {
+    func didTapBackward()
+    func didTapPlayPause()
+    func didTapForward()
+    func didSlideSlider(_ value: Float)
+}
+
 class PlayerViewController: UIViewController {
+    
+    weak var dataSource: PlayerDataSource?
+    weak var delegate: PlayerViewControllerDelegate?
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,8 +28,23 @@ class PlayerViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(controlsView)
+        
         controlsView.delegate = self
         configureBarButton()
+        configure()
+    }
+    
+    private func configure() {
+        if let image = dataSource?.imageURL{
+            imageView.loadFrom(URLAddress: image)
+        }
+        
+        controlsView.configure(
+            with: PlayerControlsViewViewModel(
+                title: dataSource?.songName,
+                subtitle: dataSource?.subtitle
+            )
+        )
     }
     
     override func viewDidLayoutSubviews() {
@@ -45,21 +70,27 @@ class PlayerViewController: UIViewController {
     @objc private func didTapAction() {
         // implement later
     }
+    
+    func refreshUI() {
+        configure()
+    }
 }
 
 extension PlayerViewController: PlayerControlsViewDelegate {
     
     func playerControlsViewDidTapBackwardButton(_ playerControlsView: PlayerControlsView) {
-        //
+        delegate?.didTapBackward()
     }
     
     func playerControlsViewDidTapPlayPauseButton(_ playerControlsView: PlayerControlsView) {
-        //
+        delegate?.didTapPlayPause()
     }
     
     func playerControlsViewDidTapForwardButton(_ playerControlsView: PlayerControlsView) {
-        //
+        delegate?.didTapForward()
     }
     
-    
+    func playerControlsView(_ playerControlsView: PlayerControlsView, didSlideSlider value: Float) {
+        delegate?.didSlideSlider(value)
+    }
 }
