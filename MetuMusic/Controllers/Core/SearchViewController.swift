@@ -34,7 +34,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
             )
             
 //            group.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-
             
             return NSCollectionLayoutSection(group: group)
         }))
@@ -98,7 +97,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
     
     func updateSearchResults(for searchController: UISearchController) {
         
-        
 //        APICaller.shared.search(with: query) { result in
 //            DispatchQueue.main.async {
 //                switch result {
@@ -149,7 +147,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
 }
 
 extension SearchViewController: SearchResultsViewControllerDelegate {
-    func didTapResult(_ result: SearchResult) {
+    func didTapResult(_ result: SearchResult) { //
         switch result {
         case .artist(model: _):
             break
@@ -157,8 +155,8 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
             let vc = AlbumViewController(album: model)
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
-        case .track(model: _):
-            break
+        case .track(model: let model):
+            PlaybackPresenter.shared.startPlayback(from: self, track: model)
         }
     }
 }

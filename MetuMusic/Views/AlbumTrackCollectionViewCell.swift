@@ -47,9 +47,6 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
             width: contentView.width - 15,
             height: contentView.height/2
         )
-
-        
-        
     }
     
     override func prepareForReuse() {
@@ -63,18 +60,18 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
         artistNameLabel.text =  viewModel.artistName
     }
     
-    func loadImage(url: URL?) -> UIImage {
-        guard let url = url else {
-            return UIImage(systemName: "photo")!
-        }
-
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                
-                return image
-            }
-        }
-        
-        return UIImage(systemName: "photo")!
-    }
+//    func loadImage(url: URL?) -> UIImage {
+//        guard let url = url else {
+//            return UIImage(systemName: "photo")!
+//        }
+//
+//        if let data = try? Data(contentsOf: url) {
+//            if let image = UIImage(data: data) {
+//
+//                return image
+//            }
+//        }
+//
+//        return UIImage(systemName: "photo")!
+//    }
 }
