@@ -1,10 +1,3 @@
-//
-//  NewReleasesCollectionViewCell.swift
-//  Spotify
-//
-//  Created by Erman Ufuk Demirci on 14.09.2022.
-//
-
 import UIKit
 
 class NewReleasesCollectionViewCell: UICollectionViewCell {

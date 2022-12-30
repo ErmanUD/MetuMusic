@@ -1,10 +1,3 @@
-//
-//  SearchResultDefaultTableViewCell.swift
-//  MetuMusic
-//
-//  Created by Erman Ufuk Demirci on 15.12.2022.
-//
-
 import UIKit
 
 class SearchResultDefaultTableViewCell: UITableViewCell {

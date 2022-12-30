@@ -1,10 +1,3 @@
-//
-//  SearchResult.swift
-//  MetuMusic
-//
-//  Created by onedio on 12.12.2022.
-//
-
 import Foundation
 
 enum SearchResult {

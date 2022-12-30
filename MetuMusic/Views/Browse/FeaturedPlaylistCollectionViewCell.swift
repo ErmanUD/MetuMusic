@@ -1,9 +1,3 @@
-//
-//  FeaturedPlaylistCollectionViewCell.swift
-//  Spotify
-//
-//  Created by Erman Ufuk Demirci on 14.09.2022.
-//
 
 import UIKit
 
@@ -29,21 +23,21 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let creatorNameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 15, weight: .thin)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-
-        return label
-    }()
+//    private let creatorNameLabel: UILabel = {
+//        let label = UILabel()
+//        label.font = .systemFont(ofSize: 15, weight: .thin)
+//        label.numberOfLines = 0
+//        label.textAlignment = .center
+//
+//        return label
+//    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.backgroundColor = .clear
         contentView.addSubview(playlistCoverImageView)
         contentView.addSubview(playlistNameLabel)
-        contentView.addSubview(creatorNameLabel)
+//        contentView.addSubview(creatorNameLabel)
         contentView.clipsToBounds = true
     }
     
@@ -56,12 +50,12 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         
         let imageSize = contentView.height - 70
         
-        creatorNameLabel.frame = CGRect(
-            x: 3,
-            y: contentView.height - 30,
-            width: contentView.width - 6,
-            height: 30
-        )
+//        creatorNameLabel.frame = CGRect(
+//            x: 3,
+//            y: contentView.height - 30,
+//            width: contentView.width - 6,
+//            height: 30
+//        )
         playlistNameLabel.frame = CGRect(
             x: 3,
             y: contentView.height - 60,
@@ -82,12 +76,12 @@ class FeaturedPlaylistCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         playlistNameLabel.text = nil
         playlistCoverImageView.image =  nil
-        creatorNameLabel.text = nil
+//        creatorNameLabel.text = nil
     }
     
     func configure(with viewModel: FeaturedPlaylistCellViewModel) {
         playlistNameLabel.text = viewModel.name
-        creatorNameLabel.text =  viewModel.creatorName
+//        creatorNameLabel.text =  viewModel.creatorName
 //        playlistCoverImageView.image = loadImage(url: viewModel.artworkURL)
         playlistCoverImageView.loadFrom(URLAddress: viewModel.artworkURL)
     }

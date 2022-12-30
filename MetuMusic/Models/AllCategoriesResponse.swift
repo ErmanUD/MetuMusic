@@ -1,10 +1,3 @@
-//
-//  AllCategoriesResponse.swift
-//  MetuMusic
-//
-//  Created by onedio on 25.11.2022.
-//
-
 import Foundation
 
 struct AllCategoriesResponse: Codable {
