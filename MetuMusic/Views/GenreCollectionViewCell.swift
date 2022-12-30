@@ -4,26 +4,18 @@ class CategoryCollectionViewCelll: UICollectionViewCell {
     static let identifier = "CategoryCollectionViewCelll"
     
     private let colors: [UIColor] = [
-//        .systemMint,      // alternative coloring
-//        .systemBlue,
-//        .systemGreen,
-//        .systemRed,
-        
-        .systemRed,
-        .systemPink,
-        .systemBlue,
-        .systemPurple,
-        .systemOrange,
-        .systemGreen,
-        .systemYellow,
-        .systemTeal,
-        .darkGray,
+        UIColor(named: "Color1")!,
+        UIColor(named: "Color2")!,
+        UIColor(named: "Color3")!,
+        UIColor(named: "Color4")!,
+        UIColor(named: "Color5")!,
+        UIColor(named: "Color6")!,
+        UIColor(named: "Color7")!,
     ]
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-//        imageView.tintColor = .red
         imageView.tintColor = .white
         imageView.image = UIImage(systemName: "music.quarternote.3")
         
@@ -76,7 +68,6 @@ class CategoryCollectionViewCelll: UICollectionViewCell {
     
     func configure(with viewModel: CategoryCollectionViewCellViewModel) {
         label.text = viewModel.title
-//        imageView.loadFrom(URLAddress: viewModel.artworkURL)
-        contentView.backgroundColor = colors[0]
+        contentView.backgroundColor = colors.randomElement()
     }
 }
