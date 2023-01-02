@@ -70,6 +70,11 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
     func configure(with viewModel: SearchResultSubtitleTableViewCellViewModel) {
         label.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
-        iconImageView.loadFrom(URLAddress: viewModel.imageUrl ?? "")
+        if let imageUrl = viewModel.imageUrl {
+            iconImageView.loadFrom(URLAddress: imageUrl)
+        } else {
+            iconImageView.image = UIImage(systemName: "photo.circle")
+        }
+        
     }
 }

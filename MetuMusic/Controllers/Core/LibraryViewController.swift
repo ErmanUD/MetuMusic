@@ -75,7 +75,7 @@ class LibraryViewController: UIViewController {
         }
     
     @objc private func didTapAdd() {
-//        playlistsVC.showCreatePlaylistAlert()
+        playlistsVC.showCreatePlaylistAlert()
     }
 }
 
@@ -85,8 +85,10 @@ extension LibraryViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x >= (view.width/2) {
             toggleView.updateState(.album)
+            updateBarButtons()
         } else {
             toggleView.updateState(.playlist)
+            updateBarButtons()
         }
     }
 }
