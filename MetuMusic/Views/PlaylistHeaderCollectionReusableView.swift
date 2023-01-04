@@ -60,6 +60,8 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
         addSubview(playAllButton)
+        imageView.layer.cornerRadius = 15
+        imageView.clipsToBounds = true
         playAllButton.addTarget(self, action: #selector(didTapPlayAll), for: .touchUpInside)
     }
     
@@ -114,7 +116,6 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         nameLabel.text = viewModel.name
         ownerLabel.text = viewModel.ownerName
         descriptionLabel.text = viewModel.description
-//        imageView.image = loadImage(url: viewModel.artworkURL)
         imageView.loadFrom(URLAddress: viewModel.artworkURL)
     }
     
@@ -124,21 +125,6 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         descriptionLabel.text = viewModel.description
         imageView.image = UIImage(named: "profileImageScaled")
     }
-    
-//    func loadImage(url: URL?) -> UIImage {
-//        guard let url = url else {
-//            return UIImage(systemName: "photo")!
-//        }
-//
-//        if let data = try? Data(contentsOf: url) {
-//            if let image = UIImage(data: data) {
-//
-//                return image
-//            }
-//        }
-//
-//        return UIImage(systemName: "photo")!
-//    }
 }
 
 protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
