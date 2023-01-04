@@ -118,6 +118,13 @@ final class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         imageView.loadFrom(URLAddress: viewModel.artworkURL)
     }
     
+    func configureForLibrary(with viewModel: PlaylistHeaderViewViewModel) {
+        nameLabel.text = viewModel.name
+        ownerLabel.text = viewModel.ownerName
+        descriptionLabel.text = viewModel.description
+        imageView.image = UIImage(named: "profileImageScaled")
+    }
+    
 //    func loadImage(url: URL?) -> UIImage {
 //        guard let url = url else {
 //            return UIImage(systemName: "photo")!

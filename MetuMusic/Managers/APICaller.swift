@@ -179,10 +179,8 @@ final class APICaller {
                     "spotify:track:\(track.id)"
                 ]
             ]
-            print(json)
             request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            print("Adding...")
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else{
                     completion(false)
@@ -191,7 +189,6 @@ final class APICaller {
 
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                        print(result)
                     if let response = result as? [String: Any],
                        response["snapshot_id"] as? String != nil {
                         completion(true)
