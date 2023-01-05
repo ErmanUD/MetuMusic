@@ -45,7 +45,7 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
                                      y: 5,
                                      width: imageSize,
                                      height: imageSize)
-        iconImageView.layer.cornerRadius = imageSize/3
+        iconImageView.layer.cornerRadius = imageSize/2
         iconImageView.layer.masksToBounds = true
         
         let labelHeight = contentView.height/2
