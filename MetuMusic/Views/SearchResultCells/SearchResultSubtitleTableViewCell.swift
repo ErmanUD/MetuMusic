@@ -75,6 +75,5 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         } else {
             iconImageView.image = UIImage(systemName: "photo.circle")
         }
-        
     }
 }

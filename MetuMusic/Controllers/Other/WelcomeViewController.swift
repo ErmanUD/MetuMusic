@@ -15,7 +15,6 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         title = Constants.title
         view.backgroundColor = .systemRed
         view.addSubview(signInButton)

@@ -59,19 +59,4 @@ class AlbumTrackCollectionViewCell: UICollectionViewCell {
         trackNameLabel.text = viewModel.name
         artistNameLabel.text =  viewModel.artistName
     }
-    
-//    func loadImage(url: URL?) -> UIImage {
-//        guard let url = url else {
-//            return UIImage(systemName: "photo")!
-//        }
-//
-//        if let data = try? Data(contentsOf: url) {
-//            if let image = UIImage(data: data) {
-//
-//                return image
-//            }
-//        }
-//
-//        return UIImage(systemName: "photo")!
-//    }
 }

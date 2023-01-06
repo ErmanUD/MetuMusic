@@ -104,7 +104,6 @@ class LibraryPlaylistsViewController: UIViewController {
                 }
             }
         }))
-
         present(alert, animated: true)
     }
 }

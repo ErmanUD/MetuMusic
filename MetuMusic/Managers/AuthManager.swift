@@ -46,30 +46,24 @@ final class AuthManager {
         
         var components = URLComponents()
         components.queryItems = [
-            URLQueryItem(name: "grant_type",
-                         value: "authorization_code"),
-            URLQueryItem(name: "code",
-                         value: code),
-            URLQueryItem(name: "redirect_uri",
-                         value: Constants.redirectURI),
+            URLQueryItem(name: "grant_type", value: "authorization_code"),
+            URLQueryItem(name: "code", value: code),
+            URLQueryItem(name: "redirect_uri",  value: Constants.redirectURI),
         ]
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded",
-                         forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = components.query?.data(using: .utf8)
         
         let basicToken = Constants.clientID + ":" + Constants.clientSecret
         let data = basicToken.data(using: .utf8)
         guard let base64String = data?.base64EncodedString() else {
-            print("Failure to get base64")
             completion(false)
             return
         }
         
-        request.setValue("Basic \(base64String)",
-                         forHTTPHeaderField: "Authorization")
+        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard let data = data, error == nil else {
@@ -129,28 +123,23 @@ final class AuthManager {
         
         var components = URLComponents()
         components.queryItems = [
-            URLQueryItem(name: "grant_type",
-                         value: "refresh_token"),
-            URLQueryItem(name: "refresh_token",
-                         value: refreshToken),
+            URLQueryItem(name: "grant_type", value: "refresh_token"),
+            URLQueryItem(name: "refresh_token", value: refreshToken),
         ]
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded",
-                         forHTTPHeaderField: "Content-Type")
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.httpBody = components.query?.data(using: .utf8)
         
         let basicToken = Constants.clientID + ":" + Constants.clientSecret
         let data = basicToken.data(using: .utf8)
         guard let base64String = data?.base64EncodedString() else {
-            print("Failure to get base64")
             completion(false)
             return
         }
         
-        request.setValue("Basic \(base64String)",
-                         forHTTPHeaderField: "Authorization")
+        request.setValue("Basic \(base64String)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             self?.refreshingToken = false
@@ -172,19 +161,14 @@ final class AuthManager {
         }
         
         task.resume()
-        
     }
     
     private func cacheToken(result: AuthResponse) {
-        UserDefaults.standard.setValue(result.access_token,
-                                       forKey: "access_token")
+        UserDefaults.standard.setValue(result.access_token, forKey: "access_token")
         if let refreshToken = result.refresh_token {
-            UserDefaults.standard.setValue(refreshToken,
-                                           forKey: "refresh_token")
+            UserDefaults.standard.setValue(refreshToken, forKey: "refresh_token")
         }
-        
-        UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expires_in)),
-                                       forKey: "expirationDate")
+        UserDefaults.standard.setValue(Date().addingTimeInterval(TimeInterval(result.expires_in)), forKey: "expirationDate")
     }
     
     public func signOut(completion: (Bool) -> Void) {

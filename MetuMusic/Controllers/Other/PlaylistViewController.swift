@@ -142,9 +142,7 @@ class PlaylistViewController: UIViewController {
                 }
             )
         )
-        present(actionSheet,
-                animated: true,
-                completion: nil)
+        present(actionSheet, animated: true, completion: nil)
     }
 
     @objc private func didTapShare() {

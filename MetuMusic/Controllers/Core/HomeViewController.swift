@@ -3,7 +3,6 @@ import UIKit
 enum BrowseSectionType {
     case newReleases(viewModels: [NewReleasesCellViewModel])
     case featuredPlaylists(viewModels: [FeaturedPlaylistCellViewModel])
-//    case recommendedTracks(viewModels: [RecommendedTrackCellViewModel])
     
     var title: String {
         switch self {
@@ -11,8 +10,6 @@ enum BrowseSectionType {
             return "New Released Albums"
         case .featuredPlaylists:
             return "Featured Playlists"
-//        case .recommendedTracks:
-//            return "Recommended Tracks"
         }
     }
 }
@@ -29,20 +26,11 @@ class HomeViewController: UIViewController {
             return HomeViewController.createSectionLayout(section: sectionIndex)
         }
     )
-    
-//    private let spinner: UIActivityIndicatorView = {
-//        let spinner = UIActivityIndicatorView()
-//        spinner.tintColor = .label
-//        spinner.hidesWhenStopped = true
-//
-//        return spinner
-//    }()
 
     private var sections = [BrowseSectionType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -52,7 +40,6 @@ class HomeViewController: UIViewController {
             action: #selector(didTapSettings)
         )
         configureCollectionView()
-//        view.addSubview(spinner)
         fetchData()
         addLongTapGesture()
     }
@@ -89,7 +76,6 @@ class HomeViewController: UIViewController {
         )
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         actionSheet.addAction(UIAlertAction(title: "Add to Playlist", style: .default, handler: { [weak self] _ in
             DispatchQueue.main.async {
                 let vc = LibraryPlaylistsViewController()
@@ -106,7 +92,6 @@ class HomeViewController: UIViewController {
                               animated: true, completion: nil)
             }
         }))
-        
         present(actionSheet, animated: true)
     }
     
@@ -162,8 +147,6 @@ class HomeViewController: UIViewController {
             }
         }
         
-        
-
         // Featured Playlists
         APICaller.shared.getFeaturedPlaylists { result in
             defer {
@@ -177,9 +160,7 @@ class HomeViewController: UIViewController {
             }
         }
         
-        
         // Recomended Tracks
-        
         APICaller.shared.getRecommendedGenres { result in
         
             switch result {
@@ -241,12 +222,6 @@ class HomeViewController: UIViewController {
                                                  creatorName: $0.owner.display_name)
         })))
         
-//        sections.append(.recommendedTracks(viewModels: tracks.compactMap({
-//            return RecommendedTrackCellViewModel(name: $0.name,
-//                                                 artistName: $0.artists.first?.name ?? "-" ,
-//                                                 artworkURL: URL(string: $0.album?.images.first?.url ?? ""))
-//        })))
-        
         collectionView.reloadData()
     }
     
@@ -268,8 +243,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             return viewModels.count
         case .featuredPlaylists(let viewModels):
             return viewModels.count
-//        case .recommendedTracks(let viewModels):
-//            return viewModels.count
         }
     }
     
@@ -299,15 +272,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             let viewModel = viewModels[indexPath.row]
             cell.configure(with: viewModel)
             return cell
-            
-//        case .recommendedTracks(let viewModels):
-//            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedTrackCollectionViewCell.identifier,
-//                                                                for: indexPath) as? RecommendedTrackCollectionViewCell else {
-//                return UICollectionViewCell()
-//            }
-//            let viewModel = viewModels[indexPath.row]
-//            cell.configure(with: viewModel)
-//            return cell
         }
     }
     
@@ -324,18 +288,15 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             vc.title = playlist.name
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
-            
             break
+            
         case .newReleases:
             let album = newAlbums[indexPath.row]
             let vc = AlbumViewController(album: album)
             vc.title = album.name
             vc.navigationItem.largeTitleDisplayMode = .never
             navigationController?.pushViewController(vc, animated: true)
-            
             break
-//        case .recommendedTracks:
-//            break
         }
     }
     
@@ -379,7 +340,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
            
            // GROUP
-           
            let verticalGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(0.8),
@@ -414,7 +374,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
            
            // GROUP
-           
            let verticalGroup = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(0.8),

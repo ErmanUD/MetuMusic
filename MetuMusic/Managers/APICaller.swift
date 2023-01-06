@@ -21,41 +21,16 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(AlbumDetailsResponse.self, from: data)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
                 }
-
             }
             task.resume()
         }
     }
-//
-//    public func getCurrentUserAlbums(completion: @escaping (Result<[Album], Error>) -> Void) {
-//            createRequest(
-//                with: URL(string: Constants.baseAPIURL + "/me/albums"),
-//                type: .GET
-//            ) { request in
-//                let task = URLSession.shared.dataTask(with: request) { data, _, error in
-//                    guard let data = data, error == nil else {
-//                        completion(.failure(APIError.faileedToGetData))
-//                        return
-//                    }
-//                    do
-//                    {
-//                        let result = try JSONDecoder().decode(LibraryAlbumsResponse.self, from: data)
-//                        completion(.success(result.items.compactMap({ $0.album })))
-//                    }
-//                    catch {
-//                        completion(.failure(error))
-//                    }
-//                }
-//                task.resume()
-//            }
-//    }
     
     public func saveAlbum(album: Album, completion: @escaping (Bool) -> Void) {
         createRequest(
@@ -90,15 +65,12 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(PlaylistDetailsResponse.self, from: data)
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
                 }
-
             }
             task.resume()
         }
@@ -114,7 +86,6 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-
                 do {
                     let result = try JSONDecoder().decode(LibraryPlaylistsResponse.self, from: data)
                     completion(.success(result.items))
@@ -145,7 +116,6 @@ final class APICaller {
                             completion(false)
                             return
                         }
-                        
                         do {
                             let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                             if let response = result as? [String: Any], response["id"] as? String != nil {
@@ -186,7 +156,6 @@ final class APICaller {
                     completion(false)
                     return
                 }
-
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     if let response = result as? [String: Any],
@@ -225,7 +194,6 @@ final class APICaller {
                     completion(false)
                     return
                 }
-
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     if let response = result as? [String: Any],
@@ -255,7 +223,6 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(UserProfile.self, from: data)
                     completion(.success(result))
@@ -263,7 +230,6 @@ final class APICaller {
                     completion(.failure(error))
                 }
             }
-            
             task.resume()
         }
     }
@@ -279,14 +245,12 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
                 }
-
             }
             task.resume()
         }
@@ -301,10 +265,8 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
-//                    print(result)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
@@ -324,14 +286,12 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do {
                     let result = try JSONDecoder().decode(GenresResponse.self, from: data)
                     completion(.success(result))
                 } catch  {
                     completion(.failure(error))
                 }
-
             }
             task.resume()
         }
@@ -346,15 +306,12 @@ final class APICaller {
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
                     return
-                }
-                
-                do {
+                }                do {
                     let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
                     completion(.success(result))
                 } catch  {
                     completion(.failure(error))
                 }
-
             }
             task.resume()
         }
@@ -372,10 +329,7 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do  {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-//                    print(json)
                     let result = try JSONDecoder().decode(AllCategoriesResponse.self, from: data)
                     completion(.success(result.categories.items))
                 } catch {
@@ -396,10 +350,7 @@ final class APICaller {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
-                
                 do  {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-//                    print(json)
                     let result = try JSONDecoder().decode(CategoryPlaylistsResponse.self, from: data)
                     let playlists = result.playlists.items
                     completion(.success(playlists))
@@ -422,11 +373,9 @@ final class APICaller {
                     return
                 }
                 do {
-//                    let json = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed)
-//                    print(json)
                     let result = try JSONDecoder().decode(SearchResultResponse.self, from: data)
-                    
                     var searchResults: [SearchResult] = []
+                    
                     searchResults.append(contentsOf: result.tracks.items.compactMap({ SearchResult.track(model: $0) }))
                     searchResults.append(contentsOf: result.artists.items.compactMap({ SearchResult.artist(model: $0) }))
                     searchResults.append(contentsOf: result.albums.items.compactMap({ SearchResult.album(model: $0) }))
@@ -449,16 +398,12 @@ final class APICaller {
         case DELETE
     }
     
-    private func createRequest(with url: URL?,
-                               type: HTTPMethod,
-                               completion: @escaping (URLRequest) -> Void)
-    {
+    private func createRequest(with url: URL?, type: HTTPMethod, completion: @escaping (URLRequest) -> Void) {
         AuthManager.shared.withValidToken { token in
             guard let apiURL = url else { return }
-            
             var request = URLRequest(url: apiURL)
-            request.setValue("Bearer \(token)",
-                             forHTTPHeaderField: "Authorization")
+            
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
             request.httpMethod = type.rawValue
             request.timeoutInterval = 30
             completion(request)

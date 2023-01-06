@@ -28,9 +28,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         tableView.frame = view.bounds
     }
-    
-    
-    
+
     private func configureModels() {
         sections.append(Section(title: "Profile", options: [Option(title: "View Your Profile", handler: { [weak self] in
             DispatchQueue.main.async {

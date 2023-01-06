@@ -63,9 +63,6 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
             width: contentView.width - albumCoverImageView.right - 15,
             height: contentView.height/2
         )
-
-        
-        
     }
     
     override func prepareForReuse() {

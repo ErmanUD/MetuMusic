@@ -42,7 +42,6 @@ class AlbumViewController: UIViewController {
                     alignment: .top
                 )
             ]
-            
             return section
         })
     )
@@ -99,7 +98,6 @@ class AlbumViewController: UIViewController {
             }
         }
         addLongTapGesture()
-
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,8 +151,6 @@ class AlbumViewController: UIViewController {
         
         present(actionSheet, animated: true)
     }
-
-    
 }
 
 extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -192,7 +188,6 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
             name: album.name,
             ownerName: album.artists.first?.name,
             description: album.release_date,
-//            artworkURL: URL(string: album.images.first?.url ?? "")
             artworkURL: album.images.first?.url ?? ""
         )
 
@@ -205,7 +200,6 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        // play song
         var track = tracks[indexPath.row]
         track.album = self.album
         PlaybackPresenter.shared.startPlayback(from: self, track: track)
