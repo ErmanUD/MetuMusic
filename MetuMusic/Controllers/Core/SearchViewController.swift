@@ -2,7 +2,6 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchResultsUpdating, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     
-    private let musicTypes: [String] = ["Pop", "Rock", "Reggea", "Soul", "Country", "Funk", "Jazz", "Disco", "Electronic", "Blues"]
     private var categories = [Category]()
 
     let searchController: UISearchController = {
@@ -32,9 +31,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
                 subitem: item,
                 count: 2
             )
-            
-//            group.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
-            
+
             return NSCollectionLayoutSection(group: group)
         }))
         
@@ -96,17 +93,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
-//        APICaller.shared.search(with: query) { result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let results):
-//                    break
-//                case.failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//        }
     }
     
     // MARK: - UICollectionView Delegate - DataSource
@@ -133,7 +119,6 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UICollect
                 artworkURL: category.icons.first?.url ?? ""
             )
         )
-        
         return cell
     }
     

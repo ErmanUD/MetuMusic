@@ -20,14 +20,6 @@ class LibraryToggleView: UIView {
         return button
     }()
 
-    private let albumsButton: UIButton = {
-        let button = UIButton()
-        button.setTitleColor(.label, for: .normal)
-        button.setTitle("Albums", for: .normal)
-        
-        return button
-    }()
-
     private let toggleIndicator: UIView = {
         let view = UIView()
         view.backgroundColor = .systemRed
@@ -43,11 +35,9 @@ class LibraryToggleView: UIView {
         super.init(frame: frame)
         
         addSubview(playlistButton)
-        addSubview(albumsButton)
         addSubview(toggleIndicator)
         
         playlistButton.addTarget(self, action: #selector(didTapPlaylists), for: .touchUpInside)
-        albumsButton.addTarget(self, action: #selector(didTapAlbums), for: .touchUpInside)
     }
 
     required init?(coder: NSCoder) {
@@ -58,18 +48,10 @@ class LibraryToggleView: UIView {
 
     @objc private func didTapPlaylists() {
         state = .playlist
-        UIView.animate(withDuration: 0.2) { // for shiftmoving animation
+        UIView.animate(withDuration: 0.2) {
             self.setupLayoutIndicator()
         }
         delegate?.libraryToggleViewDidTapPlaylists(self)
-    }
-
-    @objc private func didTapAlbums() {
-        state = .album
-        UIView.animate(withDuration: 0.2) { // for shiftmoving animation
-            self.setupLayoutIndicator()
-        }
-        delegate?.libraryToggleViewDidTapAlbums(self)
     }
 
     func updateState(_ state: State) {
@@ -89,12 +71,7 @@ class LibraryToggleView: UIView {
             width: 100,
             height: 40
         )
-        albumsButton.frame = CGRect(
-            x: playlistButton.right,
-            y: 0,
-            width: 100,
-            height: 40
-        )
+
         setupLayoutIndicator()
     }
 
@@ -103,13 +80,6 @@ class LibraryToggleView: UIView {
         case .playlist:
             toggleIndicator.frame = CGRect(
                 x: 0,
-                y: playlistButton.bottom,
-                width: 100,
-                height: 3
-            )
-        case .album:
-            toggleIndicator.frame = CGRect(
-                x: 100,
                 y: playlistButton.bottom,
                 width: 100,
                 height: 3
@@ -123,6 +93,5 @@ class LibraryToggleView: UIView {
 extension LibraryToggleView {
     enum State {
         case playlist
-        case album
     }
 }

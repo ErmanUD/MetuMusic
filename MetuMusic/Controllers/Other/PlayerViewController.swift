@@ -5,6 +5,7 @@ protocol PlayerViewControllerDelegate: AnyObject {
     func didTapPlayPause()
     func didTapForward()
     func didSlideSlider(_ value: Float)
+    func didPause()
 }
 
 class PlayerViewController: UIViewController {
@@ -34,6 +35,10 @@ class PlayerViewController: UIViewController {
         configure()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.didPause()
+    }
+    
     private func configure() {
         if let image = dataSource?.imageURL{
             imageView.loadFrom(URLAddress: image)
@@ -60,15 +65,11 @@ class PlayerViewController: UIViewController {
     
     private func configureBarButton() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapAction))
     }
     
     @objc private func didTapClose() {
+        delegate?.didPause()
         dismiss(animated: true)
-    }
-    
-    @objc private func didTapAction() {
-        // implement later
     }
     
     func refreshUI() {

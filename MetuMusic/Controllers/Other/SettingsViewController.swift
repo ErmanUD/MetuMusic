@@ -40,7 +40,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         
         sections.append(Section(title: "Account", options: [Option(title: "Sign Out", handler: { [weak self] in
             DispatchQueue.main.async {
-                self?.singOutTapped()
+                self?.signOutTapped()
             }
         })]))
     }
@@ -53,9 +53,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func singOutTapped() {
-        
-    }
+    private func signOutTapped() {
+           let alert = UIAlertController(title: "Sign Out", message: "Are you sure?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive, handler: { _ in
+                AuthManager.shared.signOut { [weak self] signedOut in
+                    if signedOut {
+                        DispatchQueue.main.async {
+                            let navVC = UINavigationController(rootViewController: WelcomeViewController())
+                            navVC.navigationBar.prefersLargeTitles = true
+                            navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+                            navVC.modalPresentationStyle = .fullScreen
+                            self?.present(navVC, animated: true, completion: {
+                                self?.navigationController?.popToRootViewController(animated: false)
+                            })
+                        }
+                    }
+                }
+            }))
+            present(alert, animated: true)
+        }
     
     // MARK: - TableView
     
@@ -86,36 +103,4 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let model = sections[section]
         return model.title
     }
-    
-//    let titles = ["title1", "title2", "title3"]
-//
-//    let mysections = [["one", "two", "three", "four"], ["five", "six", "seven"], ["eight", "nine", "ten", "eleven", "twelve"]]
-//
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return mysections.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return mysections[section].count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-//        cell.textLabel?.text = mysections[indexPath.section][indexPath.row]
-//
-//        return cell
-//    }
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-//
-//    }
-//
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//
-//        return titles[section]
-//    }
-    
-
 }

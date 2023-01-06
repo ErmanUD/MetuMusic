@@ -38,7 +38,7 @@ class LibraryPlaylistsViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         noPlaylistsView.frame = CGRect(x: view.frame.width/4 - 75, y: 120 , width: 150, height: 150)
-        tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width/2, height: view.frame.height)
+        tableView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: view.frame.height)
     }
 
     private func setUpNoPlaylistsView() {
@@ -140,7 +140,6 @@ extension LibraryPlaylistsViewController: UITableViewDelegate, UITableViewDataSo
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        HapticsManager.shared.vibrateForSelection()
         let playlist = playlists[indexPath.row]
         guard selectionHandler == nil else {
             selectionHandler?(playlist)
